@@ -15,6 +15,7 @@ mongoose.connect('mongodb://localhost:27017/nodeapi', { useNewUrlParser: true })
 requireDir('./src/models');
 
 //routes 
-app.use('/api', require('./src/routes'));
+app.use('/products', require('./src/routes/ProductRoute'))
+app.use('/users/auth', require('./src/routes/UserRoute'));
 
 app.listen(3001);
