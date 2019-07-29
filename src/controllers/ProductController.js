@@ -3,30 +3,30 @@ const mongoose = require('mongoose');
 const Product = mongoose.model('Product');
 
 module.exports = {
-  async index(request,response){
-    const { page = 1 } = request.query;
+  async index(req,res){
+    const { page = 1 } = req.query;
     const products = await Product.paginate({},{page , limit: 10});
 
-    return response.json(products);
+    return res.json(products);
   },
-  async show(request, response) {
-    const product = await Product.findById(request.params.id);
+  async show(req, res) {
+    const product = await Product.findById(req.params.id);
 
-    return response.json(product);
+    return res.json(product);
   },
-  async update(request, response){
-    const product = await Product.findByIdAndUpdate(request.params.id, request.body, {new: true});
+  async update(req, res){
+    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {new: true});
 
-    return response.json(product);
+    return res.json(product);
   },
-  async destroy(request, response){
-    await Product.findByIdAndRemove(request.params.id);
+  async destroy(req, res){
+    await Product.findByIdAndRemove(req.params.id);
     
-    return response.send();
+    return res.send();
   },
-  async store(request, response){
-    const product = await Product.create(request.body);
+  async store(req, res){
+    const product = await Product.create(req.body);
 
-    return response.json(product);
+    return res.json(product);
   }
 };
